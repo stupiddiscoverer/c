@@ -1,0 +1,9 @@
+开始调试: F5
+继续（Resume）: F5
+单步执行（Step Over）: F10
+单步进入（Step Into）: F11
+单步跳出（Step Out）: Shift + F11
+停止调试: Shift + F5
+重启调试: Ctrl + Shift + F5
+切换断点: F9
+查看调试控制台: Ctrl + Shift + Y
