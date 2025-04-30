@@ -20,8 +20,8 @@ void gpuInfo()
 
     printf("device name:             %s\n", cudaProp.name);
     printf("compute capability       %d.%d\n", cudaProp.major, cudaProp.minor);
-    printf("global memory:           %llu GB\n", cudaProp.totalGlobalMem / 1<<30);
-    printf("constant memory:         %llu KB\n", cudaProp.totalConstMem / 1<<10);
+    printf("global memory:           %llu MB\n", cudaProp.totalGlobalMem >> 20);
+    printf("constant memory:         %llu KB\n", cudaProp.totalConstMem >> 10);
     printf("grid size:               %d %d %d\n", cudaProp.maxGridSize[0],\
                             cudaProp.maxGridSize[1], cudaProp.maxGridSize[2]);
     printf("block size:              %d %d %d\n", cudaProp.maxThreadsDim[0],\

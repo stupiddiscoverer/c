@@ -8,9 +8,9 @@ void hello(char *str)
 
 typedef void (*funcModel)(char* str);
 
-void just(void* func, char* str)
+void just(funcModel func, char* str)
 {
-    ((funcModel)func)(str);
+    func(str);
 }
 
 

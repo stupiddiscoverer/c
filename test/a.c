@@ -118,15 +118,14 @@ long long minimumFuelCost(int** roads, int roadsSize, int* roadsColSize, int sea
     gotoCapital(&fuelCost, list, 0, 0, peopleCount, seats);
     free(list);
     free(peopleCount);
-    
     return (long long)fuelCost;
 }
 
 int main(int argc, char const *argv[])
 {
-    // double b = (double)0.1234567;
-    // float a = 0.23456789;
-    // printf("%.10f, %.10f\n", a, b*12.345);
+    double b = (double)0.1234567;
+    float c = 0.2345678987;
+    printf("%.10f, %.10f\n", c, b);
     printf("sizeof(void*) = %lu\n", sizeof(void*));
     int a[][2] = {{3, 1},{3,2},{1,0},{0,4},{0,5},{4,6}};
     // int a[][2] = {{0,1},{0,2},{0,3}};
@@ -134,5 +133,9 @@ int main(int argc, char const *argv[])
     printf("%lu, %lu\n", sizeof(Node*), sizeof(a) / sizeof(int) / 2);
     long long fuelcost = minimumFuelCost((int**)a, sizeof(a) / sizeof(int) / 2, 0, 2);
     printf("%lld\n", fuelcost);
+    static int d[1000000000] = {0}; //不加static会溢出，因为栈内存一般是8MB，需要用heap内存
+    printf("%ld\n", sizeof(d) / sizeof(int));
+    typeof(2) x = 3;
+    printf("%d\n", x);
     return 0;
 }
