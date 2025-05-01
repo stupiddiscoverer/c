@@ -243,7 +243,6 @@ void bignum_div(BigNum *result, BigNum *num1, BigNum *num2, BigNum *mod)
 	result->sign = num1->sign ^ num2->sign; // 结果符号
 	result->lenth = num1->lenth - num2->lenth + 1;
 
-	int pre = 0;
 	for (int i = 1; i <= result->lenth; i++)
 	{
 		// 先取前2位计算result->data[len - i], 然后mod = mod - num2 * result->data[len - i]
@@ -251,7 +250,7 @@ void bignum_div(BigNum *result, BigNum *num1, BigNum *num2, BigNum *mod)
 		int n;
 		if (num2->lenth > 1)
 		{
-			n = (pre * 100 + mod->data[mod->lenth - i] * 10 + mod->data[mod->lenth - i - 1]) / (num2->data[num2->lenth - 1] * 10 + num2->data[num2->lenth - 2]);
+			n = (mod->data[mod->lenth - i + 1] * 100 + mod->data[mod->lenth - i] * 10 + mod->data[mod->lenth - i - 1]) / (num2->data[num2->lenth - 1] * 10 + num2->data[num2->lenth - 2]);
 			if (n > 0)
 			{
 				// mod=mod[mod.len-i-num2.len + 1, mod.len-i] - num2 * n
@@ -262,16 +261,13 @@ void bignum_div(BigNum *result, BigNum *num1, BigNum *num2, BigNum *mod)
 					int tempModIndex = mod->lenth - i - num2->lenth + j + 1;
 					mod->data[tempModIndex] -= num % 10;
 					mod->data[tempModIndex + 1] -= num / 10;
-					if (j == num2->lenth - 1) {
-						break;
-					}
 					if (mod->data[tempModIndex] < 0)
 					{
 						mod->data[tempModIndex] += 10;
 						mod->data[tempModIndex + 1]--;
 					}
 				}
-				if (mod->data[mod->lenth - i] < 0)
+				if (mod->data[mod->lenth - i + 1] < 0)
 				{
 					n--;
 					for (int j = 0; j < num2->lenth; j++)
@@ -289,16 +285,11 @@ void bignum_div(BigNum *result, BigNum *num1, BigNum *num2, BigNum *mod)
 		}
 		else
 		{
-			int num = pre * 10 + mod->data[mod->lenth - i];
+			int num = mod->data[mod->lenth - i + 1] * 10 + mod->data[mod->lenth - i];
 			n = num / num2->data[0];
 			mod->data[mod->lenth - i] = num % num2->data[0];
 		}
 		result->data[result->lenth - i] = n;
-		if (pre > 0)
-		{
-			mod->data[mod->lenth - i + 1] = 0;
-		}
-		pre = mod->data[mod->lenth - i];
 	}
 	for (int i = mod->lenth - 1; i >= 0; i--)
 	{
