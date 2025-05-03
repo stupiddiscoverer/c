@@ -9,12 +9,11 @@ void printArr(int *a, int len) {
     printf("\n");    
 }
 
-void printC(int n) {
+void printPermutation(int n) {
     int chose[n];
     int chosen[n+1];
     int index = 0;
     int i = 1;
-    int goback = 0;
 
     memset(chose, 0, sizeof(chose));
     memset(chosen, 0, sizeof(chosen));
@@ -49,8 +48,53 @@ void printC(int n) {
     }
 }
 
+void printCombination(int n, int *arr, int index, int start, int end) {
+    if (index == n) {
+        printArr(arr, n);
+        return;
+    }
+    for (int i = start; i <= end && end - i + 1 >= n - index; i++) {
+        arr[index] = i;
+        printCombination(n, arr, index + 1, i + 1, end);
+    }
+}
+
+void C(int numToSelect, int *nList, int m, int i, int index){
+    if (numToSelect<1) {
+        printArr(nList, numToSelect+index);
+        return;
+    }
+    while (i<m) {
+        nList[index] = i;
+        i += 1;
+        C(numToSelect-1,nList, m, i, index+1);  // 保持n + index = n
+    }
+}
+
+void P(int numToSelect, int *nList, int m, int i, int index){
+    if (numToSelect<1) {
+        printArr(nList, numToSelect+index);
+        return;
+    }
+    while (i<m) {
+        nList[index] = i;
+        i += 1;
+        P(numToSelect-1,nList, m, i, index+1);  // 保持n + index = n
+    }
+}
+
 int main(int argc, char const *argv[])
 {
-    printC(3);
+    printf("printPermutation\n");
+    printPermutation(3);
+    int arr[5] = {1, 2, 3, 4, 5};
+    int n = 3;
+    int len = sizeof(arr) / sizeof(arr[0]);
+
+    printf("printCombination(%d, %d):\n", len, n);
+    printCombination(n, arr, 0, 0, len - 1);
+    printf("组C(%d, %d):\n", len, n);
+    int nList[n];
+    C(n, nList, len, 0, 0);
     return 0;
 }

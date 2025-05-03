@@ -53,10 +53,5 @@ int main() {
 
     // 打印所有排列
     permute(arr, 0, n);
-    int a=1, b=2;
-    printf("%d, %d\n", a, b);
-    swap1(&a, &b);
-    printf("%d, %d\n", a, b);
-
     return 0;
 }

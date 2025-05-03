@@ -3,15 +3,14 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "g++ build active file",
+            "label": "Smart build (gcc/g++/nvcc)",
             "type": "shell",
-            "command": "/usr/bin/g++",
+            "command": "bash",
             "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "-c",
+                "ext=\"${fileExtname}\"; compiler=\"\"; if [ \"$ext\" = \".c\" ]; then compiler=\"/usr/bin/gcc\"; elif [ \"$ext\" = \".cpp\" ]; then compiler=\"/usr/bin/g++\"; elif [ \"$ext\" = \".cu\" ]; then compiler=\"/usr/local/cuda/bin/nvcc\"; else echo \"Unsupported file type: $ext\"; exit 1; fi; $compiler -g \"${file}\" -o \"${fileDirname}/${fileBasenameNoExtension}.dbg\";"
             ],
+
             "group": {
                 "kind": "build",
                 "isDefault": true
