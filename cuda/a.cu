@@ -20,15 +20,16 @@ void gpuInfo()
 
     printf("device name:             %s\n", cudaProp.name);
     printf("compute capability       %d.%d\n", cudaProp.major, cudaProp.minor);
-    printf("global memory:           %llu MB\n", cudaProp.totalGlobalMem >> 20);
-    printf("constant memory:         %llu KB\n", cudaProp.totalConstMem >> 10);
+    printf("global memory:           %lu MB\n", cudaProp.totalGlobalMem >> 20);
+    printf("constant memory:         %lu KB\n", cudaProp.totalConstMem >> 10);
     printf("grid size:               %d %d %d\n", cudaProp.maxGridSize[0],\
                             cudaProp.maxGridSize[1], cudaProp.maxGridSize[2]);
     printf("block size:              %d %d %d\n", cudaProp.maxThreadsDim[0],\
                             cudaProp.maxThreadsDim[1],cudaProp.maxThreadsDim[2]);
-    printf("sm num:                  %d\n", cudaProp.multiProcessorCount);
+    printf("multiProcessorCount:        %d\n", cudaProp.multiProcessorCount);
     printf("maxThreadsPerMultiProcessor %d\n", cudaProp.maxThreadsPerMultiProcessor);
-    printf("maxBlocksPerMultiProcessor %d\n", cudaProp.maxBlocksPerMultiProcessor);
+    printf("maxBlocksPerMultiProcessor  %d\n", cudaProp.maxBlocksPerMultiProcessor);
+    printf("maxThreadsPerBlock:         %d\n", cudaProp.maxThreadsPerBlock);
     printf("accessPolicyMaxWindowSize %d\n", cudaProp.accessPolicyMaxWindowSize);
     printf("memoryBusWidth           %d\n", cudaProp.memoryBusWidth);
     printf("memoryClockRate          %d\n", cudaProp.memoryClockRate);
@@ -36,6 +37,8 @@ void gpuInfo()
     printf("canMapHostMemory         %d\n", cudaProp.canMapHostMemory);
     printf("accessPolicyMaxWindowSize %d\n", cudaProp.accessPolicyMaxWindowSize);
     printf("asyncEngineCount         %d\n", cudaProp.asyncEngineCount);
+    
+    printf("FP64 support: %s, INT64 support: Yes\n", (cudaProp.major >= 2) ? "Yes (但性能低)" : "No");
 }
 
 void addTest()

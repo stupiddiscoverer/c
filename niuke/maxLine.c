@@ -7,7 +7,7 @@ void printArr(char* arr, int rows, int cols) {
             printf("%d  ", arr[i*cols + j]);
         }
         printf("\n");
-    }
+    } 
 }
 
 int main() {
